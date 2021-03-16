@@ -1,0 +1,45 @@
+﻿@model ICollection<Player>
+
+
+<script>var team = '@ViewBag.TeamId'</script>
+<div class="row">
+    <div class="col-sm">
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">№</th>
+                    <th scope="col">Имя</th>
+                    <th scope="col">Фамилия</th>
+                    <th scope="col">Пол</th>
+                    <th scope="col">Дата рождения</th>
+                    <th scope="col">Название команды</th>
+                    <th scope="col">Страна</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var player in Model)
+                {
+                    <tr>
+                        <td class="Id">@player.Id</td>
+                        <td class="FirstName">@player.FirstName</td>
+                        <td class="LastName">@player.LastName</td>
+                        <td class="Gender">@player.Gender</td>
+                        <td class="BirthDay">@player.BirthDay</td>
+                        <td class="Team">@player.Team.Name</td>
+                        <td class="Country">@player.Country</td>
+                        <td><button class="btn btn-light btn-change">Изменить</button></td>
+                        <td>
+                            @Html.ActionLink("X",
+                                "Delete",
+                                new
+                                {
+                                    ID = player.Id
+                                })
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div id="form-change"></div>
+</div>
