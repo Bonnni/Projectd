@@ -34,16 +34,7 @@ namespace BusinessLayer.Implementation
 
         public void PlayerSave(Player player)
         {
-            var emp = _context.Players.Find(player);
-            emp.FirstName = player.FirstName;
-            emp.LastName = player.LastName;
-            emp.BirthDay = player.BirthDay;
-            emp.Gender = player.Gender;
-            emp.TeamId = player.TeamId;
-            emp.Country = player.Country;
-            
-
-            _context.Update(emp);
+            _context.Update(player);
             _context.SaveChanges();
         }
 

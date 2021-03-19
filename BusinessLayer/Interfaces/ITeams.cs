@@ -8,6 +8,7 @@ namespace BusinessLayer.Interfaces
         ICollection<Team> GetAllTeams(); 
         Team TeamById(int id);
         void TeamDelete(Team Team);
-        void TeamSave(Team Team);
+        void TeamSave(Team team);
+        void TeamCreate(Team team);
     }
 }

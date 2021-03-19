@@ -33,12 +33,16 @@ namespace BusinessLayer.Implementation
             _context.SaveChanges();
         }
 
-        public void TeamSave(Team Team)
+        public void TeamSave(Team team)
         {
-            if (Team.Id == 0)
-                _context.Teams.Add(Team);
-            else _context.Entry(Team).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
-                _context.SaveChanges();
+            _context.Update(team);
+            _context.SaveChanges();
+        }
+
+        public void TeamCreate(Team team)
+        {
+            _context.Teams.Add(team);
+            _context.SaveChanges();
         }
     }
 }

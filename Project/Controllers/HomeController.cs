@@ -1,10 +1,7 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using BusinessLayer;
 using DataLayer.Entities;
 using Newtonsoft.Json;
-using System.Text.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Project.Controllers
 {
@@ -18,22 +15,22 @@ namespace Project.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.TeamId = JsonSerializer.Serialize(_dataManager.Teams.GetAllTeams());
+            ViewBag.TeamId = JsonConvert.SerializeObject(_dataManager.Teams.GetAllTeams());
             return View(_dataManager.Players.GetAllPlayers());
         }
 
         public IActionResult Delete(int id)
         {
             _dataManager.Players.PlayerDelete(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
+
         [HttpGet]
         public IActionResult Create()
         {
             ViewBag.TeamId = _dataManager.Teams.GetAllTeams();
             return View();
         }
-
         [HttpPost]
         public IActionResult Create(Player player)
         {
@@ -42,7 +39,7 @@ namespace Project.Controllers
         }
         [HttpGet]
         public IActionResult Edit(int id)
-        {
+        { 
             return View(_dataManager.Players.PlayerById(id));
         }
 
@@ -50,7 +47,7 @@ namespace Project.Controllers
         public IActionResult Edit(Player player)
         {
             _dataManager.Players.PlayerSave(player);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }
