@@ -1,5 +1,5 @@
 ﻿const country = ["США", "Россия", "Италия"];
-const viewBagTeam = JSON.parse(team.replace(/&quot;/g, '"'));
+let teamList = "";
 
 function getGender(value) {
     if (value === "Мужской") {
@@ -9,22 +9,24 @@ function getGender(value) {
 }
 
 
-$('.btn-change').click(function() {
+$('.btn-change').click(function () {
     const player = $(this).parent('td').siblings('td').map(function(i, td) {
         return $(td).text();
     });
     let optionTeam = ``;
     let optionCountry = `<option selected>${player[6]}</option>`;
 
+    teamList = JSON.parse(window.viewBagTeam);
 
-    for (let i = 0; i < Object.keys(viewBagTeam).length; i++) {
+    for (let i = 0; i < Object.keys(teamList).length; i++) {
         if (i === 0) {
-            optionTeam = `<option value="${viewBagTeam[i].Id}" selected>${player[5]}</option>`
+            optionTeam = `<option value="${teamList[i].Id}" selected>${player[5]}</option>`;
         }
-        if (viewBagTeam[i].Name !== player[5]) {
-            optionTeam += `<option value="${viewBagTeam[i].Id}">${viewBagTeam[i].Name}</option>`;
+        if (teamList[i].Name !== player[5]) {
+            optionTeam += `<option value="${teamList[i].Id}">${teamList[i].Name}</option>`;
         }
     };
+
     for (let i = 0; i < country.length; i++) {
         if (country[i] !== player[6]) {
             optionCountry += `<option value="${country[i]}">${country[i]}</option>`;
@@ -35,25 +37,20 @@ $('.btn-change').click(function() {
     const form = `<form id="formSub" action="Home/Edit" method="POST">
                     <div class="form-group"><input name="Id" type="hidden" value="${player[0]}" />
                         <label class="col-form-label col-6">Имя</label>
-                        <input name="FirstName" type="text" class="form-control col-12" placeholder="Имя" value="${
-        player[1]}" />
+                        <input name="FirstName" type="text" class="form-control col-12" placeholder="Имя" value="${player[1]}" />
                         <label class="col-form-label col-6">Фамилия</label>
-                        <input name="LastName" type="text" class="form-control col-12" placeholder="Введите фамилию" value="${
-        player[2]}" />
+                        <input name="LastName" type="text" class="form-control col-12" placeholder="Введите фамилию" value="${player[2]}" />
                         <label class="col-form-label col-6">Пол</label>
                         <select name="Gender" type="text" class="form-control col-12" placeholder="Пол">
                             <option value="${player[3]}" selected>${player[3]}</option>
                             <option value="${getGender(player[3])}">${getGender(player[3])}</option>
                         </select>
                         <label class="col-form-label col-6">Дата рождения</label>
-                        <input name="BirthDay" type="date" class="form-control col-12" placeholder="Дата рождения" value="${
-        player[4]}" />
+                        <input name="BirthDay" type="date" class="form-control col-12" placeholder="Дата рождения" value="${player[4]}" />
                         <label class="col-form-label col-6">Команда</label>
-                        <select name="TeamId" type="text" class="form-control col-12" placeholder="Введите команду">${
-        optionTeam}</select>
+                        <select name="TeamId" type="text" class="form-control col-12" placeholder="Введите команду">${optionTeam}</select>
                         <label class="col-form-label col-6">Страна</label>
-                        <select name="Country" type="text" class="form-control col-12" placeholder="Введите страну">${
-        optionCountry}</select>
+                        <select name="Country" type="text" class="form-control col-12" placeholder="Введите страну">${optionCountry}</select>
                     </div>
                             <div class="row">
                                 <div class="form-group col-8">

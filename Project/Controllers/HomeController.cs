@@ -15,7 +15,7 @@ namespace Project.Controllers
 
         public IActionResult Index()
         {
-            ViewBag.TeamId = JsonConvert.SerializeObject(_dataManager.Teams.GetAllTeams());
+            ViewBag.Team = JsonConvert.SerializeObject(_dataManager.Teams.GetAllTeams());
             return View(_dataManager.Players.GetAllPlayers());
         }
 
