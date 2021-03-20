@@ -1,7 +1,8 @@
 ﻿@model ICollection<Player>
 
-
-<script>var team = '@ViewBag.TeamId'</script>
+<script>
+    var viewBagTeam = '@Html.Raw(ViewBag.Team)';
+</script>
 
 <div class="row">
     <div class="col-sm">
